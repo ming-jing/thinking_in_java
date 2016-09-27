@@ -6,7 +6,7 @@ class Base {
     int j;
     static int w = 3;
 
-    {
+    static {
         w = 5;
         System.out.println("base static init, w:" + w);
     }
@@ -24,10 +24,19 @@ class Base {
 class T extends Base {
     int m = -10;
     int n;
-    static final int k = 3;
+    static char c;
+    static int k = 3;
+    static final String s = getS();
+
+    static void test() {
+    }
 
     static {
         System.out.println("T static init, k:" + k);
+    }
+
+    private static String getS() {
+        return "ssss";
     }
 
     {
@@ -42,6 +51,8 @@ class T extends Base {
 
 public class Ex2 {
     public static void main(String[] args) {
+//        System.out.println(T.k);
+//        T.test();
         new T();
     }
 }
