@@ -5,6 +5,13 @@ abstract class TTK {
     TTK(){};
     abstract void test();
 }
+
+interface ITT {
+    class T implements ITT {
+
+    }
+}
+
 public class Test {
     static int k = 3;
 
