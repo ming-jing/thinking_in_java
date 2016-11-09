@@ -38,7 +38,7 @@ public enum NotificationCenter {
         return notification.getProxy();
     }
 
-    private static class Notification<T> {
+    private static class Notification<T> implements InvocationHandler {
 
         private Set<Object> mObservers;
         private Class<T> mCallback;
@@ -48,23 +48,21 @@ public enum NotificationCenter {
             mCallback = callback;
         }
 
-        private class ProxyHandler implements InvocationHandler {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                for (Object observer : mObservers) {
-                    if (mCallback.isInstance(observer)) {
-                        method.invoke(observer,args);
-                    }
+        @Override
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            for (Object observer : mObservers) {
+                if (mCallback.isInstance(observer)) {
+                    method.invoke(observer,args);
                 }
-                return null;
             }
+            return null;
         }
 
         T mProxy = null;
 
         private T getProxy() {
             if (mProxy == null) {
-                mProxy = (T)Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),new Class[]{mCallback},new ProxyHandler());
+                mProxy = (T)Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(),new Class[]{mCallback},this);
             }
 
             return mProxy;
