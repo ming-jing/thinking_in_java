@@ -1,0 +1,50 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Created by belows on 2016/11/16.
+ */
+class BerylliumSphere {
+    private static long counter;
+    private final long id = counter++;
+
+    public String toString() {
+        return "Sphere " + id;
+    }
+}
+
+public class ContainerComparison {
+    public static void main(String[] args) {
+//        BerylliumSphere[] spheres = new BerylliumSphere[10];
+//        for (int i = 0; i < 5; i++)
+//            spheres[i] = new BerylliumSphere();
+//        System.out.println(Arrays.toString(spheres));
+//        System.out.println(spheres[4]);
+//        List<BerylliumSphere> sphereList =
+//                new ArrayList<>();
+//        for (int i = 0; i < 5; i++)
+//            sphereList.add(new BerylliumSphere());
+//        System.out.println(sphereList);
+//        System.out.println(sphereList.get(4));
+//        int[] integers = {0, 1, 2, 3, 4, 5};
+//        System.out.println(Arrays.toString(integers));
+//        System.out.println(integers[4]);
+//        List<Integer> intList = Arrays.asList(0, 1, 2, 3, 4, 5);//new ArrayList<Integer>(
+////                Arrays.asList(0, 1, 2, 3, 4, 5));
+//        intList.add(97);
+//        System.out.println(intList);
+//        System.out.println(intList.get(4));
+        String pattern = "https?://(.*)/";
+        Matcher matcher = Pattern.compile(pattern).matcher("");
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            matcher.reset(line);
+            System.out.println(matcher.find());
+        }
+    }
+}
